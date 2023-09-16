@@ -1,0 +1,17 @@
+#home-container{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    background-color: rgb(206, 206, 206);
+}
+#aside{
+    width: 20vw;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+#category ul {
+    list-style: none; 
+}
+#category ul li {
+    margin: 5px;
+}

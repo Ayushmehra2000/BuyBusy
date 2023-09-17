@@ -1,15 +1,20 @@
-import { ListItem } from "./ListItem";
+import { ListItem } from "../Itemlist/ListItem";
+import { Navbar } from "../Navbar";
 import "./home.css"
-export function Home(){
+export function Home({isLoggedIn , setIsloggedIn}){
     return(<>
     <div id="home-container">
+        <div id="search-Box" >
+            <input type='text' placeholder = "Search By Name"/>
+        </div>
         <div id="aside">
             <div id="range">
-                <h3>Price-range</h3>
+                <h2>Filter</h2>
+                <h3>Price: 2000</h3>
                 <input type="range" />
             </div>
             <div id="category">
-                <h3>Categories</h3>
+                <h2>Categories</h2>
                 <ul>
                     <li><input type="checkbox" /><span>Men's</span></li>
                     <li><input type="checkbox" /><span>Women's</span></li>

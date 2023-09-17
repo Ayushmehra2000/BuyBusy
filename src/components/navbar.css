@@ -1,6 +1,7 @@
 #Header{
+    margin: 0px;
     display: flex;
-    width: 100vw;
+    width: 98.5vw;
     height: 50px;
     background-color: blue;
     color: white;
@@ -17,4 +18,20 @@
 #logo span{
     font-size: 1.5rem;
     font-weight: bold;
+}
+#Menu{
+    display: flex;
+    width: 50%;
+    height: inherit;
+    align-items: center;
+    justify-content: space-evenly;
+}
+#Menu a{
+    text-decoration: none !important ;
+    color: white;
+}
+.menu-items{
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
 }

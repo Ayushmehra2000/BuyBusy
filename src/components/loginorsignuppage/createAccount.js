@@ -1,16 +1,24 @@
 import { createRef } from "react"
 import "./login.css"
-export function SignUp(){
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from "../firebase";
+import { NavLink } from "react-router-dom";
+
+
+export function SignUp({userdata, setUserdata}){
     const username = createRef();
     const email = createRef();
     const password = createRef();
 
-    function addDataTodatabase(user){
-        
+    const addDataTodatabase= async(user)=>{
+        const docRef = await addDoc(collection(db, "Userdata"), user);
     }
 
     const handleSignUp =(e)=>{
         e.preventDefault();
+        if(username.current.value===""||email.current.value===""||password.current.value===""){
+            return;
+        }
         const user = {
             name: username.current.value,
             useremail: email.current.value,
@@ -35,7 +43,7 @@ export function SignUp(){
                 <button className="loginBtn" onClick={(e)=> handleSignUp(e)}>Create Account</button>
             </form>
             <p>
-                or <span>Sign In</span>
+                Already have Account? <NavLink to="/login" ><span className="login-signup">  Login</span></NavLink>
             </p>
         </div>
     </div>

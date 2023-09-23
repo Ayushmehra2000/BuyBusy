@@ -79,3 +79,13 @@
 .input:focus{
     border: 5px solid blue;
 }
+.error{
+    width: 80%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(56, 10, 10, 0.2);
+    border: 2px solid red;
+    margin: 0px auto;
+    font-weight: bold;
+}

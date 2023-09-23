@@ -4,7 +4,11 @@ import { BsFillBasket3Fill } from "react-icons/bs";
 import { Outlet ,NavLink } from "react-router-dom";
 import { useValue } from "./buybusyContent/BuybusyContent";
 export function Navbar(){
-    const {isLoggedIn} = useValue();
+    const {isLoggedIn ,logout} = useValue();
+
+    const handleLogout=async()=>{
+      await logout()
+    }
     return(<>
     <div id="Header">
         <div id="logo"><span>BuyBusy</span></div>
@@ -32,13 +36,22 @@ export function Navbar(){
                   }
                 : null
             } to="/cart"><div className="Cart-menu menu-items"><FiShoppingCart /><span> Cart</span></div></NavLink></>:null}
+
+            {isLoggedIn? <NavLink style={({ isActive }) =>
+              isActive
+                ? {
+                    color: "black",
+                  }
+                : null
+            } to="/login"><div className="Cart-menu menu-items" onClick={handleLogout}><FiLogIn /><span>Logout</span></div></NavLink>:
             <NavLink style={({ isActive }) =>
               isActive
                 ? {
                     color: "black",
                   }
                 : null
-            } to="/login"><div className="Cart-menu menu-items"><FiLogIn /><span>{isLoggedIn?" Logout":" Login"}</span></div></NavLink>
+            } to="/login"><div className="Cart-menu menu-items"><FiLogIn /><span>Login</span></div></NavLink>}
+            
         </div>
     </div>
     <Outlet />

@@ -5,23 +5,30 @@ import { NavLink } from "react-router-dom";
 export function Login(){
     const email = createRef();
     const password = createRef();
-    const {isLoggedIn, setIsloggedIn,userdata} = useValue();
+    const {Login,Error, setError} = useValue();
+
+    const userLogin = async(email,password)=>{
+        await Login(email,password);
+        setTimeout(()=>{setError("")},3000)
+    }
     const handleLogin=(e)=>{
-        const emailcheck = email.current.value;
-        const passwordcheck = password.current.value;
         e.preventDefault();
-        console.log(userdata);
-        const check = userdata.find((user) => user.useremail === emailcheck && user.userpassword === passwordcheck);
-        if(check){
-            setIsloggedIn(true);
+        if(email.current.value==="" || password.current.value===""){
+            return;
         }
-        console.log(emailcheck,passwordcheck,check, isLoggedIn);
+        userLogin(email.current.value,password.current.value)
+        clear();
     };
+    const clear =()=>{
+        email.current.value="";
+        password.current.value="";
+    }
     return(<>
     <div className="login-container">
         <div id="loginBox" >
             <form>
                 <h1>Login</h1><br/>
+                {Error && <div className="error"><p>{Error}</p></div>}
                 <input type="email" placeholder="E-mail" ref={email} required/>
                 <input type="password" placeholder="Password" ref={password} required />
                 <button className="loginBtn" onClick={(e)=>handleLogin(e)}>Log In </button>

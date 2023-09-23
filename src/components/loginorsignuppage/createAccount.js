@@ -1,34 +1,27 @@
 import { createRef } from "react"
 import "./login.css"
-import { collection, addDoc } from "firebase/firestore"; 
-import { db } from "../firebase";
 import { NavLink } from "react-router-dom";
+import { useValue } from "../buybusyContent/BuybusyContent";
 
 
-export function SignUp({userdata, setUserdata}){
-    const username = createRef();
+export function SignUp(){
+    const {Signup,Error, setError} = useValue();
     const email = createRef();
     const password = createRef();
-
-    const addDataTodatabase= async(user)=>{
-        const docRef = await addDoc(collection(db, "Userdata"), user);
+    const createAccount = async(email,password)=>{
+        await Signup(email,password); 
+        setTimeout(()=>{setError("")},3000);
     }
 
     const handleSignUp =(e)=>{
         e.preventDefault();
-        if(username.current.value===""||email.current.value===""||password.current.value===""){
+        if(email.current.value==="" || password.current.value===""){
             return;
         }
-        const user = {
-            name: username.current.value,
-            useremail: email.current.value,
-            userpassword: password.current.value
-        }
-        addDataTodatabase(user);
+        createAccount(email.current.value,password.current.value)
         clear();
     }
     const clear =()=>{
-        username.current.value = "";
         email.current.value="";
         password.current.value="";
     }
@@ -37,7 +30,7 @@ export function SignUp({userdata, setUserdata}){
         <div id="SignUpBox" >
             <form >
                 <h1>Create Account</h1><br/>
-                <input className="input" type="text" name="name" placeholder="Name" ref={username} required/>
+                {Error && <div className="error"><p>{Error}</p></div>}
                 <input className="input" type="email" name="email" placeholder="E-mail" ref={email} required/>
                 <input className="input" type="password" name="password" placeholder="Password" ref={password} required/>
                 <button className="loginBtn" onClick={(e)=> handleSignUp(e)}>Create Account</button>
